@@ -1,0 +1,88 @@
+import { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
+import "../Styles/Projects.css";
+
+const API = "http://localhost:5003";
+
+export default function Projects() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/project`)
+      .then((r) => r.json())
+      .then(setProjects)
+      .catch(() => {});
+  }, []);
+
+  return (
+    <div className="min-vh-100 bg-img pb-5">
+      <section className="bg-img-projects">
+        <div className="container text-center" style={{ maxWidth: "950px" }}>
+          <div
+            className="text-center align-items-center"
+            style={{ marginTop: "110px", minHeight: "200px" }}
+          >
+            <h1 className="display-4 fw-bold mb-3 gradient-text-blue pt-2">
+              Our Projects
+            </h1>
+
+            <p className="lead text-muted mb-4 pt-1">
+              Explore our portfolio of successful video campaigns and solutions
+              that have helped businesses achieve remarkable growth and
+              engagement.
+            </p>
+          </div>
+
+          <div className="row g-4">
+            {projects.map((p) => (
+              <div key={p._id} className="col-12 col-md-6 col-lg-4">
+                <div className="card h-100 border-0 shadow-sm overflow-hidden project-card rounded-4">
+                  {/* IMAGE */}
+                  <div className="position-relative" style={{ height: "200px" }}>
+                    <img
+                      src={
+                        p.image
+                          ? `${API}${p.image}`
+                          : "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+                      }
+                      alt={p.title}
+                      className="w-100 h-100"
+                      style={{ objectFit: "cover", transition: "transform .3s" }}
+                    />
+
+                    {/* overlay */}
+                    <div
+                      className="position-absolute top-0 start-0 w-100 h-100"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.7) 100%)",
+                      }}
+                    />
+                  </div>
+
+                  {/* BODY */}
+                  <div className="card-body text-start">
+                    <h5 className="card-title mb-2">{p.title}</h5>
+                    <p className="card-text text-muted">{p.description}</p>
+
+                    <div className="d-flex gap-3 mt-3">
+                      <Link to={`/project/${p._id}`}>View</Link>
+
+                      {p.link && (
+                        <a href={p.link} target="_blank" rel="noreferrer">
+                          Live link
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+    </div>
+  );
+}

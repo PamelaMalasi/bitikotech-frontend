@@ -1,0 +1,254 @@
+/* NEW: make padding count toward width (prevents overflow) */
+.home-section {
+  min-height: 800px;
+  width: 100%; 
+  display: block;          /* gap doesn’t apply to block */
+  /* gap: 100px;  <-- remove; not used on block layout */
+  padding: 10px 8%;
+  /* background-color: #f5f2fb; */
+  box-sizing: border-box;  /* ✅ added */
+} 
+
+/* .one{
+     background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    /* background-image: url('../images/somecanva-shared4.png'); 
+    background-color: white;
+    opacity: 0.91;
+    min-height: 400px;
+} */
+
+
+.about-section {
+  place-items: center;
+}
+
+
+/* Optional: a bit wider on large screens */
+/* @media (min-width: 1024px) {
+  .about { max-width: 65ch; }
+} */
+
+
+.about h3{
+align-items: center;
+text-align: left;
+font-size: 20px;
+}
+
+/* NEW: cap the card row so it never stretches too wide */
+.cards{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center; 
+  gap: 30px;
+  flex-wrap: wrap;              /* stays */
+  max-width: 1200px;            /* ✅ added */
+  margin-left: auto;            /* ✅ added */
+  margin-right: auto;           /* ✅ added */
+}
+
+.glow-soft{
+  box-shadow:
+    0 0 14px rgba(107,70,193,.45),   /* purple glow */
+    0 0 28px rgba(49,130,206,.35),   /* blue glow */
+    0 10px 24px rgba(0,0,0,.12);     /* depth */
+}
+.glow-soft:hover{
+  box-shadow:
+    0 0 18px rgba(230, 103, 7, 0.6),
+    0 0 36px rgba(206, 49, 49, 0.5),
+    0 14px 32px rgba(0,0,0,.16);
+}
+
+/* replace heavy glow */
+.card-glow{
+  box-shadow:
+    0 4px 14px rgba(17,24,39,.06),
+    0 10px 30px rgba(49,130,206,.12);   /* subtle blue tint */
+}
+.card-glow:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 18px rgba(17,24,39,.08),
+    0 16px 40px rgba(49,130,206,.18);
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+
+
+/* Soft white/brand glow around each letter */
+.text-glow{
+  color:#fff; /* keep text white */
+  text-shadow:
+    0 0 6px  rgba(18, 92, 221, 0.7),
+    0 0 12px rgba(255,255,255,.5),
+    0 0 24px rgba(17, 83, 146, 0.624),   /* blue-ish outer glow (optional) */
+    0 0 48px rgba(107,70,193,.35);  /* purple-ish outer glow (optional) */
+}
+
+/* Optional: gentle pulsing glow */
+@keyframes pulse-glow{
+  0%,100%{
+    text-shadow:
+      0 0 6px  rgba(255,255,255,.7),
+      0 0 12px rgba(255,255,255,.5),
+      0 0 24px rgba(49,130,206,.45),
+      0 0 48px rgba(107,70,193,.35);
+  }
+  50%{
+    text-shadow:
+      0 0 8px  rgba(255,255,255,.95),
+      0 0 16px rgba(255,255,255,.7),
+      0 0 28px rgba(49,130,206,.6),
+      0 0 60px rgba(107,70,193,.5);
+  }
+}
+
+.text-glow.glow-anim { animation: pulse-glow 2.6s ease-in-out infinite; }
+
+
+.card-2, .card-1{
+  max-width: 550px;
+  width: 100%; 
+  height: 350px;
+  background-color: #ffffff;
+  opacity: 0.9;                 /* ✅ fixed (was 80%) */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(80, 164, 225, 0.719);
+    align-items: center;
+  text-align: center;
+   padding: 20px;   
+}
+
+.button-card{
+  border: none; 
+  background-color:#149be3fc;
+  color: white;
+}
+
+.button-card-nav{
+  border: none; 
+  background-color:#149be3fc;
+  color: white;
+}
+
+.card p { text-align: center; }
+
+.card-1, .card-2, .card-stat {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card-1:hover, .card-2:hover, .card-stat:hover, 
+.card-1:active, .card-2:active, card-stat:active {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.home-text h1{
+  font-weight: bold;
+  font-size: 100px;
+  color:rgb(31, 96, 217); 
+}
+
+.home-text h2{
+  font-size: 50px;
+  margin-top: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home-span{
+  color: #ffffff;
+}
+
+.home-text { text-align: center; }
+
+.bitiko-gradient{
+  /* background: linear-gradient(90deg,#6b46c1,#3182ce,#f97316); */
+  background: linear-gradient(90deg,#6b46c181,#3182ce8f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.highlight {
+ background: linear-gradient(90deg, #6b46c1, rgb(31, 96, 217)); 
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* ensures gradient applies properly */
+  font-weight: bold;
+}
+
+
+@media (min-width: 769px) {
+
+  .about-section-min{
+    display: none;
+  }
+}
+
+/* Phones and small devices */
+@media (max-width: 768px) {
+
+  .about-section-max{
+    display: none;
+  }
+  .home-text h1 {
+    font-size: 32px;
+  }
+
+  .home-text h2 {
+    font-size: 16px;
+    max-width: 90%;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;            /* ✅ ensure row can shrink */
+    padding-inline: 0;          /* ✅ avoid double padding from parent */
+  }
+
+  .card-1, .card-2 {
+    width: 100%;
+    max-width: 95%;             /* ✅ keeps side gutters on phones */
+    height: auto;               /* ✅ let content define height */
+    padding: 16px;              /* ✅ smaller padding on phones */
+  }
+
+  .card-1 p, .card-2 p {
+    font-size: 14px;
+  }
+
+  .fw-semibold.fs-2 {
+    font-size: 20px !important;
+  }
+
+  /* CHANGED: target react-bootstrap buttons correctly */
+  .btn {
+    font-size: 14px;            /* ✅ was `Button {}` */
+    padding: 8px 12px;
+  }
+
+  .home-section {
+    min-height: auto;           /* ✅ don’t force tall section on phones */
+    padding: 20px;              /* ✅ simpler padding */
+  }
+}
+
+/* Optional nicety: hover on large screens */
+@media (hover: hover) {
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    transition: all .25s ease;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-body { padding: 2.5rem; }
+}

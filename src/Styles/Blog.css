@@ -1,0 +1,35 @@
+
+.bg-blog {
+  background-image: url("../images/bitiko-blog-background2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 500px; /* adjust */
+}
+
+.gradient-text-blue {
+  background: "linear-gradient(to right, #22d3ee, #3b82f6, #9333ea)";
+  -webkit-background-clip: text;  /* Safari/Chrome */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;             /* fallback */
+}
+
+
+/* keep text white when selected — even on hover/focus */
+.nav-pills .nav-link.active,
+.nav-pills .nav-link.active:hover,
+.nav-pills .nav-link.active:focus {
+  color: #fff;
+  background-color: #149be3fc;
+}
+
+.btn-blue-text-border{
+    color: #149be3fc;
+    border: 1px solid #149be3fc;
+}
+.btn-blue-text-border:hover{
+    background: #149be3fc; 
+    color: white;
+}

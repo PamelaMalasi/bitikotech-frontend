@@ -1,0 +1,94 @@
+/* .growth-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../images/somecanva-1.png')
+} */
+
+/* gradient text */
+.gradient-text{
+  background: linear-gradient(90deg, var(--bs-primary), var(--bs-info));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* subtle glass look */
+.glass-card{ background: rgba(255,255,255,.95); backdrop-filter: blur(8px); }
+.backdrop-blur{ backdrop-filter: blur(6px); }
+
+.my-card{
+  background:#fff;            /* or your bg */
+  border-radius:16px;         /* optional */
+  box-shadow: 0 14px 28px rgba(69, 166, 226, 0.289);  /* soft + subtle */
+}
+
+
+
+/* animated shiny border around cards/video */
+/* .shine-border::before{
+  content:""; position:absolute; inset:-6px; border-radius:1rem;
+  background: linear-gradient(135deg, var(--bs-primary), var(--bs-info), var(--bs-primary));
+  filter: blur(10px); opacity:.45; transition: opacity .3s ease;
+  z-index: 0; pointer-events: none;
+}
+.shine-border:hover::before{ opacity: .5; } */
+
+/* animated shiny border around cards/video */
+/* softer default + softer hover */
+
+/* .shine-border1::before{
+  content:"";
+  position:absolute;
+  inset:-8px;                
+  border-radius:1rem;
+  background: linear-gradient(135deg, var(--bs-primary), var(--bs-info), var(--bs-primary));
+  filter: blur(6px);         
+  opacity:.25;          
+  transition: opacity .25s ease;
+  z-index:0;
+  pointer-events:none;
+}
+.shine-border1:hover::before{ opacity:.5; }    */
+
+/* .shine-border1 {
+  position: relative;        
+  isolation: isolate;      
+} */
+
+/* .shine-border1::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:1rem;
+  background: linear-gradient(135deg, var(--bs-primary), var(--bs-info), var(--bs-primary));
+  filter: blur(6px);
+  opacity:.25;
+  transition: opacity .25s ease;
+  z-index:-1;             
+  pointer-events:none;
+}
+
+.shine-border1:hover::before{ opacity:.5; } */
+
+
+
+/* shining guide lines */
+.shine-line-x{ height:2px;
+  background: linear-gradient(90deg, transparent, var(--bs-primary), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+.shine-line-y{ width:2px;
+  background: linear-gradient(180deg, transparent, var(--bs-primary), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* overlay on video for depth */
+.video-gradient-overlay{
+  background: linear-gradient(0deg, rgba(248,249,250,.7), transparent 40%);
+  pointer-events:none;
+}
+
+/* pulse */
+@keyframes pulse{
+  0%,100%{ opacity:.35; filter: blur(1px); }
+  50%{ opacity:1; filter: blur(3px); }
+}

@@ -1,0 +1,39 @@
+.bg-img-projects {
+  background-image: url("../images/bitiko-projects-background3.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 500px; 
+} 
+
+.btn-blue {
+  background-color: #149be3fc;
+  color: #fcfcfc;        /* normal state */
+  border: 1px solid #149be3fc;
+}
+
+.btn-blue:hover {
+  color: #149be3fc;          /* now this works */
+  border: 1px solid #149be3fc;
+}
+
+
+.btn-blue-text{
+    color: #149be3fc;
+}
+
+.btn-blue-text:hover {
+  color: white;          /* now this works */
+  background: #149be3fc; 
+}
+
+
+.gradient-text-blue {
+  background: linear-gradient(90deg, #004aad, #5de0e6);
+  -webkit-background-clip: text;  /* Safari/Chrome */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;             /* fallback */
+}
+

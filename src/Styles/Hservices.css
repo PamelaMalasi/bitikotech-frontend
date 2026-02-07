@@ -1,0 +1,29 @@
+/* .services {
+   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    background-image: url('../images/somecanva-2.png')
+}
+
+.carousel {
+   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+    background-image: url('../images/somecanva-3.png')
+} */
+
+.card-services {
+    background-color: white;
+     box-shadow: 0 14px 28px rgba(69, 166, 226, 0.289); 
+    /* opacity: 0.8; */
+}
+
+.services-button{
+    border: 1px solid #e1d5fa; 
+    background-color: white;
+}
+
+.services-button:hover{
+    background-color: #e8ddfd;
+}
+

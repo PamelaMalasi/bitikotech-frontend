@@ -1,0 +1,105 @@
+.background-about{
+    background-color: white;
+}
+
+:root{
+  --ah-green: #163b2e;         /* deep green swoosh */
+  --ah-dot: rgba(22, 59, 46, .12);
+  --ah-highlight: #cfeecf;     /* soft mint highlight under “succeed” */
+  --ah-shadow: 0 30px 60px rgba(0,0,0,.12);
+}
+
+.about-hero {
+  background: #fff;
+}
+
+/* Small “ABOUT US” label */
+.kicker {
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #8a94a6;
+  font-size: .8rem;
+}
+
+/* Title with soft paint highlight on one word */
+.about-hero-title .marker {
+  background: linear-gradient(transparent 60%, var(--ah-highlight) 0);
+  border-radius: .25rem;
+  padding: 0 .12em;  /* tiny padding so the paint peeks outside letters */
+}
+
+/* Right visual “blob” container */
+.about-hero-visual {
+  position: relative;
+  width: min(560px, 92%);
+  aspect-ratio: 5 / 4;
+  margin-left: auto;
+  margin-right: 0;
+  border-radius: 58% 42% 60% 40% / 42% 58% 40% 60%;
+  overflow: hidden;
+  box-shadow: var(--ah-shadow);
+  background: #f7f9fb;
+  isolation: isolate; /* keep pseudo-elements under the image nicely */
+}
+
+.img-about{
+    width: 600px;
+    height: 600px;
+}
+
+/* The photo */
+.about-hero-visual .cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* Deep-green swoosh behind image */
+.about-hero-visual::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: -8%;
+  left: -12%;
+  width: 130%;
+  height: 75%;
+  background: var(--ah-green);
+  border-radius: 0 0 65% 65% / 0 0 85% 85%;
+  transform: rotate(-8deg);
+  filter: blur(0.4px);          /* just a touch to soften the edge */
+}
+
+/* Dotted accent */
+.about-hero-visual::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -8%;
+  bottom: 6%;
+  width: 70%;
+  height: 38%;
+  background-image:
+    radial-gradient(var(--ah-dot) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+  background-position: 0 0;
+  transform: rotate(-10deg);
+  filter: blur(.2px);
+}
+
+/* Spacing tweaks on smaller screens */
+@media (max-width: 991.98px) {
+  .about-hero-title {
+    font-size: clamp(2rem, 7vw, 3rem);
+  }
+  .about-hero-visual {
+    margin-inline: auto;
+  }
+}
+
+
+

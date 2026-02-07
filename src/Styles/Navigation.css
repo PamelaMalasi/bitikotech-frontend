@@ -1,0 +1,163 @@
+.nav-button{
+    background: white;
+}
+
+.btn-blue{
+    background-color: #149be3fc;
+}
+
+.btn-light-1{
+    background-color: #e1e3e5fc;
+    border: none;
+    border-top-left-radius: 16px;  
+    border-bottom-left-radius: 16px;  
+    width: 200px;
+    height: 50px;
+}
+
+.btn-light-2{
+    background-color: #e1e3e5fc;
+    border: none;
+    border-top-right-radius: 16px;  
+    border-bottom-right-radius: 16px;  
+    width: 200px;
+    height: 50px;
+}
+
+
+
+
+
+ .btn-light-1.active,
+.btn-light-1.active:hover {
+  background-color: #149be3fc;
+  color: white;
+}
+
+.btn-light-2.active,
+.btn-light-2.active:hover {
+  background-color: #149be3fc;
+  color: white;
+}
+
+/* Soft shadow fade under the navbar */
+/* .navbar-elevated {
+
+  z-index: 1030;
+  box-shadow: 0 4px 18px rgba(24, 39, 75, 0.10); 
+  position: relative;
+} */
+
+/* Extra gentle fade line */
+.navbar-elevated::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;   /* sits just below the bar */
+  height: 10px;                      /* thickness of the fade */
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.12),
+    rgba(0,0,0,0)
+  );
+}
+
+.navbar-elevated1::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;   /* sits just below the bar */
+  height: 10px;                      /* thickness of the fade */
+  pointer-events: none;
+}
+
+
+/* Thin, always-visible underline for Nav.Link */
+
+.nav-underline { text-decoration: none; }
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(2px);
+  z-index: 1049; /* just under .mobile-menu (1050) */
+}
+
+@media (max-width: 991.98px) {
+  /* Turn the collapsed area into a right-side drawer */
+  .nav-margin{
+    margin-top: 80px; 
+  }
+  .hamburger-button{
+    border: none;
+  }
+
+  .navbar .mobile-menu {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    height: 100vh;                 /* full height */
+    width: 78vw;                   /* drawer width */
+    max-width: 360px;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(8px);
+    padding: 16px;
+    box-shadow: -16px 0 40px rgba(0,0,0,0.12);
+    transform: translateX(100%);   /* hidden to the right */
+    transition: transform .25s ease;
+    z-index: 1050;                 /* above page content */
+  }
+
+  /* When the hamburger is opened, Bootstrap adds .show */
+  .navbar .mobile-menu.show {
+    transform: translateX(0);
+  }
+
+  /* Make links look nice inside the drawer */
+  .navbar .mobile-menu .nav-link {
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: #111 !important;
+  }
+  .navbar .mobile-menu .nav-link + .nav-link {
+    margin-top: 6px;
+  }
+  .navbar .mobile-menu .nav-link:hover {
+    background: linear-gradient(90deg, #004aad1a, #5de0e620);
+  }
+
+  /* Keep the toggle above the drawer */
+  .navbar .navbar-toggler {
+    z-index: 1100;
+  }
+  /* Thin, always-visible underline for Nav.Link */
+.nav-underline {
+  position: relative;
+  padding-bottom: .3rem;     /* room for the line */
+  border: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  text-decoration: none;
+}
+
+.nav-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;                               /* thinner line */
+  background-color: rgba(0,0,0,.25);         /* tweak color as needed */
+  transform: scaleX(1);                       /* always visible */
+}
+
+/* Optional: subtle hover color change */
+.nav-underline:hover::after {
+  background-color: rgba(0,0,0,.45);
+}
+
+/* Optional: active page highlight */
+.nav-underline.active::after,
+.nav-underline[aria-current="page"]::after {
+  background-color: var(--bs-primary);
+}
+}
+
