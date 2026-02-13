@@ -7,7 +7,7 @@ import ManageProjects from "./ManageProjects";
 
 
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
 
 export default function AdminLogin() {
   const [screen, setScreen] = useState("panel"); // "panel" | "addBlog" | "blogs" | "addProject" | "projects"

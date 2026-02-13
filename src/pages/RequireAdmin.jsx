@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
 
 export default function RequireAdmin({ children }) {
   const [checking, setChecking] = useState(true);

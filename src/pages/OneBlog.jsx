@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
 
 export default function OneBlog() {
   const { id } = useParams();
@@ -30,7 +30,7 @@ export default function OneBlog() {
 <button onClick={() => navigate("/admin/blogs")}>← Back</button>
       {blog.image && (
         <img
-          src={`http://localhost:5003${blog.image}`}
+          src={`${API}/uploads/${blog.image}`}
           alt=""
           style={{ width: "100%", margin: "20px 0" }}
         />

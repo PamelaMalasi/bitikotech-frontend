@@ -1,16 +1,21 @@
 import { useNavigate } from "react-router-dom";
 
+
+    const API = import.meta.env.VITE_API_URL;
 export default function AdminPanel({ onLogout }) {
+
+
   const navigate = useNavigate();
+  
+const logout = async () => {
+  await fetch(`${API}/admin/logout`, {
+    method: "POST",
+    credentials: "include",
+  });
 
-    const logout = async () => {
-    await fetch("http://localhost:5003/admin/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+  navigate("/admin");
+};
 
-    navigate("/admin"); // go back to login
-  };
 
 
   return (

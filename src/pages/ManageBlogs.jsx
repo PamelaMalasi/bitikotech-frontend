@@ -4,7 +4,7 @@ import EditBlog from "./EditBlog";
 
 
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
 
 export default function ManageBlogs({ goBack }) {
   const [blogs, setBlogs] = useState([]);
