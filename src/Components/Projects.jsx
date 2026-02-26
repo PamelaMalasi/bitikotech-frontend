@@ -3,17 +3,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "../Styles/Projects.css";
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
+console.log("API:", API);
 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    fetch(`${API}/project`)
-      .then((r) => r.json())
-      .then(setProjects)
-      .catch(() => {});
-  }, []);
+useEffect(() => {
+  fetch(`${API}/project`, { credentials: "include" })
+    .then(async (r) => {
+      const data = await r.json().catch(() => null);
+      if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
+      return data;
+    })
+    .then(setProjects)
+    .catch((err) => console.error("PROJECT FETCH ERROR:", err));
+}, []);
+
 
   return (
     <div className="min-vh-100 bg-img pb-5">

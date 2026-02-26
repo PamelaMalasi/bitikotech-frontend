@@ -2,17 +2,23 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Bookmark, MoreHorizontal, Star, Twitter } from "lucide-react";
 
-const API = "http://localhost:5003";
+const API = import.meta.env.VITE_API_URL;
+console.log("API:", API);
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
-    fetch(`${API}/blog`)
-      .then((r) => r.json())
-      .then((data) => setBlogs(Array.isArray(data) ? data : []))
-      .catch(() => {});
-  }, []);
+useEffect(() => {
+  fetch(`${API}/blog`, { credentials: "include" })
+    .then(async (r) => {
+      const data = await r.json().catch(() => null);
+      if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
+      return data;
+    })
+    .then(setProjects)
+    .catch((err) => console.error("PROJECT FETCH ERROR:", err));
+}, []);
+
 
   return (
     <section className="min-vh-100 bg-light">
