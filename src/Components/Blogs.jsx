@@ -15,8 +15,8 @@ useEffect(() => {
       if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
       return data;
     })
-    .then(setProjects)
-    .catch((err) => console.error("PROJECT FETCH ERROR:", err));
+    .then(setBlogs)
+    .catch((err) => console.error("BLOG FETCH ERROR:", err));
 }, []);
 
 
