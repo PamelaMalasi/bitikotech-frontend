@@ -37,7 +37,7 @@ export default function Projects() {
                 style={{ width: 300, height: 300, top: "50%", left: "30%" }}
             />
 
-            <Navbar />
+          
 
             {/* Hero */}
             <section className="pt-5 pb-5 position-relative" style={{ paddingTop: "9rem" }}>
