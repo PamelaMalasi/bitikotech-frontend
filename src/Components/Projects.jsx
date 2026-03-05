@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
 import "../Styles/Projects.css";
+import { motion } from "framer-motion";
+import { Container, Row, Col, Link } from "react-bootstrap";
+import PortfolioCard from "../Components/PortfolioCard";
 
 const API = import.meta.env.VITE_API_URL;
 console.log("API:", API);
@@ -22,73 +24,85 @@ useEffect(() => {
 
 
   return (
-    <div className="min-vh-100 bg-img pb-5">
-      <section className="bg-img-projects">
-        <div className="container text-center" style={{ maxWidth: "950px" }}>
-          <div
-            className="text-center align-items-center"
-            style={{ marginTop: "110px", minHeight: "200px" }}
-          >
-            <h1 className="display-4 fw-bold mb-3 gradient-text-blue pt-2">
-              Our Projects
-            </h1>
+       <div className="min-vh-100 bg-background position-relative overflow-hidden">
+      {/* Background orbs */}
+      <div className="glow-orb bg-primary position-absolute" style={{ width: 500, height: 500, top: -100, left: -100 }} />
+      <div
+        className="glow-orb bg-secondary position-absolute"
+        style={{ width: 400, height: 400, bottom: 200, right: -100 }}
+      />
+      <div
+        className="glow-orb bg-accent position-absolute"
+        style={{ width: 300, height: 300, top: "50%", left: "30%" }}
+      />
 
-            <p className="lead text-muted mb-4 pt-1">
-              Explore our portfolio of successful video campaigns and solutions
-              that have helped businesses achieve remarkable growth and
-              engagement.
-            </p>
-          </div>
+      <Navbar />
 
-          <div className="row g-4">
-            {projects.map((p) => (
-              <div key={p._id} className="col-12 col-md-6 col-lg-4">
-                <div className="card h-100 border-0 shadow-sm overflow-hidden project-card rounded-4">
-                  {/* IMAGE */}
-                  <div className="position-relative" style={{ height: "200px" }}>
-                    <img
-                      src={
-                        p.image
+      {/* Hero */}
+      <section className="pt-5 pb-5 position-relative" style={{ paddingTop: "9rem" }}>
+        <Container className="position-relative" style={{ zIndex: 10 }}>
+          <Row className="justify-content-center text-center">
+            <Col lg={8} xl={6}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <h1 className="font-display fw-bold mb-3" style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)" }}>
+                  <span className="gradient-text">PORTFOLIO</span>
+                </h1>
+                <p className="text-muted fs-6 mx-auto" style={{ maxWidth: 520 }}>
+                  A curated collection of creative work spanning digital art, branding, and interactive design.
+                </p>
+              </motion.div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      {/* Portfolio Grid */}
+      <section id="work" className="pb-5 position-relative">
+        <Container className="position-relative" style={{ zIndex: 10, maxWidth: 960 }}>
+          {/* Keep your existing masonry styles OR swap to a Bootstrap grid below */}
+          <div className="masonry-grid">
+      {projects.map((p) => (
+              <PortfolioCard
+               key={p._id}               
+ image={p.image
                           ? `${API}${p.image}`
                           : "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
-                      }
-                      alt={p.title}
-                      className="w-100 h-100"
-                      style={{ objectFit: "cover", transition: "transform .3s" }}
-                    />
-
-                    {/* overlay */}
-                    <div
-                      className="position-absolute top-0 start-0 w-100 h-100"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.7) 100%)",
-                      }}
-                    />
-                  </div>
-
-                  {/* BODY */}
-                  <div className="card-body text-start">
-                    <h5 className="card-title mb-2">{p.title}</h5>
-                    <p className="card-text text-muted">{p.description}</p>
-
-                    <div className="d-flex gap-3 mt-3">
-                      <Link to={`/project/${p._id}`}>View</Link>
-
-                      {p.link && (
-                        <a href={p.link} target="_blank" rel="noreferrer">
-                          Live link
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
+}
+               alt={p.title}
+            
+              />
             ))}
           </div>
-
-        </div>
+          {/* --- Optional: Bootstrap grid instead of masonry (uncomment to use) ---
+          <Row className="g-4">
+            {projects.map((project, i) => (
+              <Col key={project.title} xs={12} sm={6} lg={4}>
+                <PortfolioCard
+                  image={project.image}
+                  title={project.title}
+                  category={project.category}
+                  index={i}
+                />
+              </Col>
+            ))}
+          </Row>
+          */}
+        </Container>
       </section>
+
+      {/* Footer */}
+      <footer className="border-top py-4 position-relative" style={{ zIndex: 10 }}>
+        <Container>
+          <div className="d-flex justify-content-between align-items-center">
+            <span className="font-display fw-bold gradient-text">STUDIO</span>
+            <p className="mb-0 small text-muted">© 2026 All rights reserved</p>
+          </div>
+        </Container>
+      </footer>
     </div>
   );
 }

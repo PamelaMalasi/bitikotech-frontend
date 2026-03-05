@@ -22,6 +22,7 @@ import OneProject from "./pages/OneProject";
 
 import RequireAdmin from "./pages/RequireAdmin";
 
+
 function AppRoutes({ loggedIn, setLoggedIn }) {
   const location = useLocation();
   const showBackgroundVideo = location.pathname === "/";
