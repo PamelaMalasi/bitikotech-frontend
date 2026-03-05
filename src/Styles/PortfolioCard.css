@@ -1,0 +1,17 @@
+.portfolio-img {
+  transition: transform 0.7s ease;
+}
+
+.glass-card:hover .portfolio-img {
+  transform: scale(1.1);
+}
+
+.portfolio-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.glass-card:hover .portfolio-overlay {
+  opacity: 1;
+}
