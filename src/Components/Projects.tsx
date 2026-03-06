@@ -21,7 +21,7 @@ const projects = [
   { image: portfolio8, title: "Glass Architecture", category: "Visualization" },
 ];
 
-const Index = () => {
+const Projects = () => {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Background orbs */}
@@ -74,4 +74,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Projects;
