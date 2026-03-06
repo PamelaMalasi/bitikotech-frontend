@@ -23,7 +23,7 @@ export default function Projects() {
     <div className="min-vh-100 bg-img pb-5">
       <section className="bg-img-projects">
         <div className="container text-center" style={{ maxWidth: "950px" }}>
-          
+
           <div style={{ marginTop: "110px", minHeight: "200px" }}>
             <h1 className="display-4 fw-bold mb-3 gradient-text-blue pt-2">
               Our Projects
@@ -44,12 +44,12 @@ export default function Projects() {
                     <img
                       src={
                         p.image
-                          ? `${API}${p.image}`
+                          ? p.image
                           : "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
                       }
                       alt={p.title}
                       className="w-100 h-100"
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", transition: "transform .3s" }}
                     />
 
                     <div
