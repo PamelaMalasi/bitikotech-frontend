@@ -15,7 +15,10 @@ useEffect(() => {
       if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
       return data;
     })
-    .then(setBlogs)
+    .then((data) => {
+      console.log("BLOGS:", data);
+      setBlogs(data);
+    })
     .catch((err) => console.error("BLOG FETCH ERROR:", err));
 }, []);
 
