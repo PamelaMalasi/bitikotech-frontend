@@ -110,7 +110,7 @@ useEffect(() => {
                   {b.image && (
                     <div className="d-none d-sm-block">
                       <img
-                        src={`${API}${b.image}`}
+                        src={b.image || "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"}
                         alt={b.title}
                         className="rounded"
                         style={{
