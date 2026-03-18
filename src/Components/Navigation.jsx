@@ -6,11 +6,11 @@ import logo from "../images/logo.png";
 import "../Styles/Navigation.css";
 import "../Styles/Home.css";
 
-const API_BASE = "http://localhost:5003";
+
 
 function Navigation() {
-  const location = useLocation();
-  const nav = useNavigate();
+
+
 
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);

@@ -6,6 +6,7 @@ import Home from "./Components/Home";
 import About from "./Components/About";
 import Services from "./Components/Services";
 import Navigation from "./Components/Navigation";
+import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import Blogs from "./Components/Blogs";
 import Projects from "./Components/Projects";
@@ -22,7 +23,6 @@ import OneProject from "./pages/OneProject";
 
 import RequireAdmin from "./pages/RequireAdmin";
 
-
 function AppRoutes({ loggedIn, setLoggedIn }) {
   const location = useLocation();
   const showBackgroundVideo = location.pathname === "/";
@@ -38,7 +38,8 @@ function AppRoutes({ loggedIn, setLoggedIn }) {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/blog" element={<Blogs />} />
-<Route path="/projects" element={<Projects />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
 
         <Route path="/blog/:id" element={<OneBlog />} />
         <Route path="/project/:id" element={<OneProject />} />
