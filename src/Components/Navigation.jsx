@@ -48,9 +48,8 @@ function Navigation() {
       fixed="top"
       expanded={expanded}
       onToggle={(isOpen) => setExpanded(isOpen)}
-      className={`${scrolled ? "bg-white shadow-sm nav-white" : "bg-transparent"} ${
-        scrolled ? "navbar-elevated1" : "navbar-elevated"
-      }`}
+      className={`${scrolled ? "bg-white shadow-sm nav-white" : "bg-transparent"} ${scrolled ? "navbar-elevated1" : "navbar-elevated"
+        }`}
     >
       <Container
         className="home-text position-relative d-flex align-items-center justify-content-between"
@@ -116,19 +115,13 @@ function Navigation() {
                 Services
               </Nav.Link>
 
-            
-            
+
+
             </Nav>
           </Nav>
 
           {/* ✅ Contact button (no refresh) */}
-          <Link
-            to="/contact"
-            className={`rounded-4 btn d-none d-md-inline-flex ${
-              scrolled ? "button-card-nav" : "btn-light"
-            }`}
-            onClick={() => setExpanded(false)}
-          >
+          <Link to="/contact" onClick={() => setExpanded(false)}>
             Free consultation
           </Link>
         </Navbar.Collapse>

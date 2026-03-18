@@ -39,7 +39,7 @@ function AppRoutes({ loggedIn, setLoggedIn }) {
         <Route path="/services" element={<Services />} />
         <Route path="/blog" element={<Blogs />} />
         <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<h1>Contact works</h1>} />
 
         <Route path="/blog/:id" element={<OneBlog />} />
         <Route path="/project/:id" element={<OneProject />} />
