@@ -21,10 +21,8 @@ export default function Projects() {
   }, []);
 
   const breakpoints = {
-    default: 3,
-    992: 2,
-    576: 1,
-  };
+  default: 2,
+};
 
   return (
     <div className="min-vh-100 bg-img pb-5">
