@@ -21,8 +21,8 @@ export default function Projects() {
   }, []);
 
   const breakpoints = {
-  default: 2,
-};
+    default: 2,
+  };
 
   return (
     <div className="min-vh-100 bg-img pb-5">
@@ -46,16 +46,15 @@ export default function Projects() {
           >
             {projects.map((p, index) => (
               <div key={p._id}>
-                <div className="card border-0 shadow-sm overflow-hidden project-card rounded-4">
-                  <div
-                    className={`position-relative project-image-wrapper ${
-                      index % 3 === 0
-                        ? "project-tall"
-                        : index % 3 === 1
+                <div
+                  className={`card border-0 shadow-sm overflow-hidden project-card rounded-4 ${index % 3 === 0
+                      ? "project-tall"
+                      : index % 3 === 1
                         ? "project-medium"
                         : "project-small"
                     }`}
-                  >
+                >
+                  <div className="position-relative project-image-wrapper">
                     <img
                       src={
                         p.image
@@ -65,15 +64,12 @@ export default function Projects() {
                       alt={p.title}
                       className="w-100 h-100 project-image"
                     />
-
                     <div className="project-overlay" />
                   </div>
 
                   <div className="card-body text-start">
                     <h5 className="card-title mb-2">{p.title}</h5>
-                    <p className="card-text text-muted mb-0">
-                      {p.description}
-                    </p>
+                    <p className="card-text text-muted mb-0">{p.description}</p>
 
                     <div className="d-flex gap-3 mt-3">
                       <Link to={`/project/${p._id}`} className="project-link">
