@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Styles/Projects.css";
 import { Link } from "react-router-dom";
+import Masonry from "react-masonry-css";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -19,11 +20,16 @@ export default function Projects() {
       .catch((err) => console.error("PROJECT FETCH ERROR:", err));
   }, []);
 
+  const breakpoints = {
+    default: 3,
+    992: 2,
+    576: 1,
+  };
+
   return (
     <div className="min-vh-100 bg-img pb-5">
       <section className="bg-img-projects">
-        <div className="container text-center" style={{ maxWidth: "950px" }}>
-
+        <div className="container text-center" style={{ maxWidth: "1100px" }}>
           <div style={{ marginTop: "110px", minHeight: "200px" }}>
             <h1 className="display-4 fw-bold mb-3 gradient-text-blue pt-2">
               Our Projects
@@ -35,12 +41,23 @@ export default function Projects() {
             </p>
           </div>
 
-          <div className="row g-4">
-            {projects.map((p) => (
-              <div key={p._id} className="col-12 col-md-6 col-lg-4">
-                <div className="card h-100 border-0 shadow-sm overflow-hidden project-card rounded-4">
-
-                  <div className="position-relative" style={{ height: "200px" }}>
+          <Masonry
+            breakpointCols={breakpoints}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {projects.map((p, index) => (
+              <div key={p._id}>
+                <div className="card border-0 shadow-sm overflow-hidden project-card rounded-4">
+                  <div
+                    className={`position-relative project-image-wrapper ${
+                      index % 3 === 0
+                        ? "project-tall"
+                        : index % 3 === 1
+                        ? "project-medium"
+                        : "project-small"
+                    }`}
+                  >
                     <img
                       src={
                         p.image
@@ -48,39 +65,39 @@ export default function Projects() {
                           : "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
                       }
                       alt={p.title}
-                      className="w-100 h-100"
-                      style={{ objectFit: "cover", transition: "transform .3s" }}
+                      className="w-100 h-100 project-image"
                     />
 
-                    <div
-                      className="position-absolute top-0 start-0 w-100 h-100"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.7) 100%)",
-                      }}
-                    />
+                    <div className="project-overlay" />
                   </div>
 
                   <div className="card-body text-start">
                     <h5 className="card-title mb-2">{p.title}</h5>
-                    <p className="card-text text-muted">{p.description}</p>
+                    <p className="card-text text-muted mb-0">
+                      {p.description}
+                    </p>
 
                     <div className="d-flex gap-3 mt-3">
-                      <Link to={`/project/${p._id}`}>View</Link>
+                      <Link to={`/project/${p._id}`} className="project-link">
+                        View
+                      </Link>
 
                       {p.link && (
-                        <a href={p.link} target="_blank" rel="noreferrer">
+                        <a
+                          href={p.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="project-link"
+                        >
                           Live link
                         </a>
                       )}
                     </div>
                   </div>
-
                 </div>
               </div>
             ))}
-          </div>
-
+          </Masonry>
         </div>
       </section>
     </div>
