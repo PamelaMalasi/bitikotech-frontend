@@ -69,15 +69,13 @@
 
 .project-image-wrapper {
   position: relative;
-  flex: 8;
+  width: 100%;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
 }
 
 .project-card .card-body {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 16px;
 }
 
 .project-image {
@@ -96,9 +94,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.05) 35%,
-    rgba(0, 0, 0, 0.55) 100%
+    rgba(226, 47, 249, 0.2) 0%,
+    rgba(204, 135, 213, 0.05) 35%,
+    rgba(175, 69, 232, 0.55) 100%
   );
 }
 
