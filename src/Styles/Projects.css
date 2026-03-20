@@ -4,37 +4,35 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  min-height: 500px; 
-} 
+  min-height: 500px;
+}
 
 .btn-blue {
   background-color: #149be3fc;
-  color: #fcfcfc;        /* normal state */
+  color: #fcfcfc;
   border: 1px solid #149be3fc;
 }
 
 .btn-blue:hover {
-  color: #149be3fc;          /* now this works */
+  color: #149be3fc;
   border: 1px solid #149be3fc;
 }
 
-
-.btn-blue-text{
-    color: #149be3fc;
+.btn-blue-text {
+  color: #149be3fc;
 }
 
 .btn-blue-text:hover {
-  color: white;          /* now this works */
-  background: #149be3fc; 
+  color: white;
+  background: #149be3fc;
 }
-
 
 .gradient-text-blue {
   background: linear-gradient(90deg, #004aad, #5de0e6);
-  -webkit-background-clip: text;  /* Safari/Chrome */
+  -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;             /* fallback */
+  color: transparent;
 }
 
 .my-masonry-grid {
@@ -55,37 +53,6 @@
 .project-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
-}
-
-/* 80% image */
-.project-image-wrapper {
-  flex: 8;
-  min-height: 180px; /* prevents it from being too small */
-}
-
-/* 20% text */
-.project-card .card-body {
-  flex: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* image stays nice */
-.project-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.project-image {
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.project-card:hover .project-image {
-  transform: scale(1.06);
 }
 
 .project-small {
@@ -98,6 +65,30 @@
 
 .project-tall {
   height: 400px;
+}
+
+.project-image-wrapper {
+  position: relative;
+  flex: 8;
+  overflow: hidden;
+}
+
+.project-card .card-body {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.06);
 }
 
 .project-overlay {
@@ -120,8 +111,6 @@
   text-decoration: underline;
 }
 
-
-
 @media (max-width: 576px) {
   .project-small,
   .project-medium,
@@ -129,5 +118,3 @@
     height: 220px;
   }
 }
-
-
