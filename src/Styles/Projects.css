@@ -1,3 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background: #101321;
+  --foreground: #f2f2f2;
+
+  --card: #191d2e;
+  --card-foreground: #f2f2f2;
+
+  --popover: #191d2e;
+  --popover-foreground: #f2f2f2;
+
+  --primary: #ef4799;
+  --primary-foreground: #ffffff;
+
+  --secondary: #3790e8;
+  --secondary-foreground: #ffffff;
+
+  --muted: #272c3a;
+  --muted-foreground: #858a99;
+
+  --accent: #9d4fd1;
+  --accent-foreground: #ffffff;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+
+  --border: #2b3140;
+  --input: #2b3140;
+  --ring: #ef4799;
+
+  --radius: 1rem;
+
+  /* Custom tokens */
+  --glass-bg: rgba(29, 34, 48, 0.6);
+  --glass-bg-hover: rgba(29, 34, 48, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 255, 255, 0.15);
+
+  --pink-glow: #ef4799;
+  --blue-glow: #3790e8;
+
+  --gradient-pink-blue: linear-gradient(135deg, #ef4799, #3790e8);
+  --gradient-blue-pink: linear-gradient(135deg, #3790e8, #ef4799);
+
+  --shadow-glow-pink: 0 0 40px rgba(239, 71, 153, 0.3);
+  --shadow-glow-blue: 0 0 40px rgba(55, 144, 232, 0.3);
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Outfit', sans-serif;
+
+  --sidebar-background: #101321;
+  --sidebar-foreground: #f2f2f2;
+  --sidebar-primary: #ef4799;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #272c3a;
+  --sidebar-accent-foreground: #f2f2f2;
+  --sidebar-border: #2b3140;
+  --sidebar-ring: #ef4799;
+}
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  background: var(--glass-bg-hover);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow-pink), var(--shadow-glow-blue);
+}
+
+.gradient-text {
+  background: var(--gradient-pink-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
 .bg-img-projects {
   /* background-image: url("../images/bitiko-projects-background3.png"); */
   background-size: cover;

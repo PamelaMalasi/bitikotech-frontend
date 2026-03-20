@@ -46,7 +46,7 @@ export default function Projects() {
           >
             {projects.map((p, index) => (
               <div key={p._id}>
-                <div className="card border-0 shadow-sm overflow-hidden project-card rounded-4">
+                <div className="card border-0 shadow-sm overflow-hidden glass-card rounded-4">
                   <div
                     className={`position-relative project-image-wrapper ${index % 3 === 0
                         ? "project-tall"
