@@ -53,6 +53,14 @@
 .project-card {
   display: flex;
   flex-direction: column;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* when clicked */
+.project-card:active {
+  box-shadow: 0 0 0 4px rgba(151, 20, 227, 0.4),
+              0 10px 30px rgba(150, 34, 161, 0.2);
+  transform: scale(0.98);
 }
 
 .project-small {
