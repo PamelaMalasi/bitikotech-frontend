@@ -1,60 +1,111 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../Styles/Admin.css";
 
 const API = import.meta.env.VITE_API_URL;
 
-export default function AddProject({ goBack }) {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [link, setLink] = useState("");
-    const [image, setImage] = useState(null);
-    const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
+export default function AddProject() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [link, setLink] = useState("");
+  const [image, setImage] = useState(null);
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const submit = async (e) => {
-        e.preventDefault();
-        setMsg("");
+  const submit = async (e) => {
+    e.preventDefault();
+    setMsg("");
 
-        if (!title || !description || !image) {
-            setMsg("Fill all required fields + image.");
-            return;
-        }
+    if (!title || !description || !image) {
+      setMsg("Please fill all required fields and choose an image.");
+      return;
+    }
 
-        const fd = new FormData();
-        fd.append("title", title);
-        fd.append("description", description);
-        fd.append("link", link);
-        fd.append("image", image);
+    setLoading(true);
+    const fd = new FormData();
+    fd.append("title", title);
+    fd.append("description", description);
+    fd.append("link", link);
+    fd.append("image", image);
 
-        const res = await fetch(`${API}/project`, {
-            method: "POST",
-            credentials: "include",
-            body: fd,
-        });
+    const res = await fetch(`${API}/project`, { method: "POST", credentials: "include", body: fd });
+    setLoading(false);
 
-        if (!res.ok) return setMsg("Failed to create project.");
+    if (!res.ok) return setMsg("Failed to create project.");
 
-        setMsg("✅ Project created!");
-        setTitle("");
-        setDescription("");
-        setLink("");
-        setImage(null);
-    };
+    setMsg("success");
+    setTitle(""); setDescription(""); setLink(""); setImage(null);
+  };
 
-    return (
-        <div style={{ maxWidth: 520, margin: "120px auto", padding: 16 }}>
-            <h2>Add Project</h2>
-
-            <form onSubmit={submit} style={{ display: "grid", gap: 10 }}>
-                <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <textarea placeholder="Description" rows={4} value={description} onChange={(e) => setDescription(e.target.value)} />
-                <input placeholder="Link (optional)" value={link} onChange={(e) => setLink(e.target.value)} />
-                <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files?.[0] || null)} />
-                <button type="submit">Create</button>
-                <button onClick={() => navigate("/admin/panel")}>← Back</button>
-            </form>
-
-            {msg && <p>{msg}</p>}
+  return (
+    <div className="admin-page">
+      <div className="admin-container">
+        <div className="admin-header">
+          <h1 className="admin-title">Add Project</h1>
+          <button className="btn-admin-secondary" onClick={() => navigate("/admin/panel")}>
+            ← Back
+          </button>
         </div>
-    );
+
+        <div className="admin-card">
+          {msg === "success" && (
+            <p className="admin-msg-success">Project created successfully.</p>
+          )}
+          {msg && msg !== "success" && (
+            <p className="admin-msg-error">{msg}</p>
+          )}
+
+          <form onSubmit={submit} className="admin-form">
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Title</label>
+              <input
+                className="form-control"
+                placeholder="Project title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Description</label>
+              <textarea
+                className="form-control"
+                rows={4}
+                placeholder="Describe this project..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">
+                Live Link <span className="text-muted fw-normal">(optional)</span>
+              </label>
+              <input
+                className="form-control"
+                placeholder="https://..."
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label fw-semibold small">Cover Image</label>
+              <input
+                className="form-control"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files?.[0] || null)}
+              />
+            </div>
+
+            <button type="submit" className="btn-admin-primary w-100" disabled={loading}>
+              {loading ? "Creating…" : "Create Project"}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
 }

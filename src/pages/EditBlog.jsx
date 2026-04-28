@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../Styles/Admin.css";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -8,7 +9,8 @@ export default function EditBlog({ blog, goBack }) {
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
   const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTitle(blog.title);
@@ -18,36 +20,69 @@ export default function EditBlog({ blog, goBack }) {
 
   const save = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     const res = await fetch(`${API}/blog/${blog._id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
       body: JSON.stringify({ title, excerpt, content }),
     });
-
-    if (!res.ok) return setMsg("Update failed");
+    setLoading(false);
+    if (!res.ok) return setMsg("Update failed. Please try again.");
     goBack();
   };
 
   return (
-    <div style={{ maxWidth: 600, margin: "120px auto" }}>
-      <h2>Edit Blog</h2>
+    <div className="admin-page">
+      <div className="admin-container">
+        <div className="admin-header">
+          <h1 className="admin-title">Edit Blog Post</h1>
+          <button
+            className="btn-admin-secondary"
+            onClick={() => navigate("/admin/blogs")}
+          >
+            ← Cancel
+          </button>
+        </div>
 
-      <form onSubmit={save} style={{ display: "grid", gap: 10 }}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
-        <textarea
-          rows={6}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+        <div className="admin-card">
+          {msg && <p className="admin-msg-error">{msg}</p>}
 
-        <button>Save</button>
-       <button onClick={() => navigate("/admin/blogs")}>← Cancel</button>
-      </form>
+          <form onSubmit={save} className="admin-form">
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Title</label>
+              <input
+                className="form-control"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
 
-      {msg && <p>{msg}</p>}
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Excerpt</label>
+              <input
+                className="form-control"
+                value={excerpt}
+                onChange={(e) => setExcerpt(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label fw-semibold small">Content</label>
+              <textarea
+                className="form-control"
+                rows={8}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
+
+            <button type="submit" className="btn-admin-primary w-100" disabled={loading}>
+              {loading ? "Saving…" : "Save Changes"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

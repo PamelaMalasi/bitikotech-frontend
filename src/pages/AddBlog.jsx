@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../Styles/Admin.css";
 
 const API = import.meta.env.VITE_API_URL;
 
-
-export default function AddBlog({ goBack }) {
+export default function AddBlog() {
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [msg, setMsg] = useState("");
-    const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const submit = async (e) => {
     e.preventDefault();
@@ -21,46 +22,88 @@ export default function AddBlog({ goBack }) {
       return;
     }
 
+    setLoading(true);
     const fd = new FormData();
     fd.append("title", title);
     fd.append("excerpt", excerpt);
     fd.append("content", content);
     fd.append("image", image);
 
-    const res = await fetch(`${API}/blog`, {
-      method: "POST",
-      credentials: "include",
-      body: fd,
-    });
+    const res = await fetch(`${API}/blog`, { method: "POST", credentials: "include", body: fd });
+    setLoading(false);
 
-    if (!res.ok) return setMsg("Failed to create blog.");
-    setMsg("✅ Blog created!");
-    setTitle("");
-    setExcerpt("");
-    setContent("");
-    setImage(null);
+    if (!res.ok) return setMsg("Failed to create blog post.");
+
+    setMsg("success");
+    setTitle(""); setExcerpt(""); setContent(""); setImage(null);
   };
 
   return (
-    <div style={{ maxWidth: 520, margin: "120px auto", padding: 16 }}>
-      <h2>Add Blog</h2>
+    <div className="admin-page">
+      <div className="admin-container">
+        <div className="admin-header">
+          <h1 className="admin-title">Add Blog Post</h1>
+          <button className="btn-admin-secondary" onClick={() => navigate("/admin/panel")}>
+            ← Back
+          </button>
+        </div>
 
-      <form onSubmit={submit} style={{ display: "grid", gap: 10 }}>
-        <input placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <input placeholder="Excerpt" value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
-        <textarea placeholder="Content" rows={6} value={content} onChange={(e) => setContent(e.target.value)} />
+        <div className="admin-card">
+          {msg === "success" && (
+            <p className="admin-msg-success">Blog post created successfully.</p>
+          )}
+          {msg && msg !== "success" && (
+            <p className="admin-msg-error">{msg}</p>
+          )}
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImage(e.target.files?.[0] || null)}
-        />
+          <form onSubmit={submit} className="admin-form">
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Title</label>
+              <input
+                className="form-control"
+                placeholder="Post title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
 
-        <button type="submit">Create</button>
-        <button onClick={() => navigate("/admin/panel")}>← Back</button>
-      </form>
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Excerpt</label>
+              <input
+                className="form-control"
+                placeholder="Short summary shown in the listing"
+                value={excerpt}
+                onChange={(e) => setExcerpt(e.target.value)}
+              />
+            </div>
 
-      {msg && <p style={{ marginTop: 12 }}>{msg}</p>}
+            <div className="mb-3">
+              <label className="form-label fw-semibold small">Content</label>
+              <textarea
+                className="form-control"
+                rows={8}
+                placeholder="Write the full content here..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label fw-semibold small">Cover Image</label>
+              <input
+                className="form-control"
+                type="file"
+                accept="image/*"
+                onChange={(e) => setImage(e.target.files?.[0] || null)}
+              />
+            </div>
+
+            <button type="submit" className="btn-admin-primary w-100" disabled={loading}>
+              {loading ? "Creating…" : "Create Post"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

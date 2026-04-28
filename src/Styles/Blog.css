@@ -9,11 +9,11 @@
 }
 
 .gradient-text-blue {
-  background: "linear-gradient(to right, #22d3ee, #3b82f6, #9333ea)";
-  -webkit-background-clip: text;  /* Safari/Chrome */
+  background: linear-gradient(to right, #22d3ee, #3b82f6, #9333ea);
+  -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;             /* fallback */
+  color: transparent;
 }
 
 

@@ -121,7 +121,12 @@ function Navigation() {
           </Nav>
 
           {/* ✅ Contact button (no refresh) */}
-          <Link to="/contact" onClick={() => setExpanded(false)}>
+          <Link
+            to="/contact"
+            onClick={() => setExpanded(false)}
+            className="btn btn-blue rounded-4 px-4 py-2 fw-semibold text-decoration-none"
+            style={{ fontSize: "0.9rem", whiteSpace: "nowrap" }}
+          >
             Free consultation
           </Link>
         </Navbar.Collapse>

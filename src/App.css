@@ -47,3 +47,33 @@ body {
 
 html body { font-family: 'GlacialIndifference', sans-serif !important; }
 
+/* ── Global brand utilities ── */
+.btn-blue {
+  background-color: #149be3;
+  color: #fff;
+  border: 1px solid #149be3;
+}
+.btn-blue:hover {
+  background-color: #0e82c5;
+  color: #fff;
+  border-color: #0e82c5;
+}
+.btn-blue-text {
+  color: #149be3;
+  background: transparent;
+  border: none;
+}
+.btn-blue-text:hover {
+  color: #fff;
+  background: #149be3;
+}
+.btn-blue-outline {
+  color: #149be3;
+  background: transparent;
+  border: 1px solid #149be3;
+}
+.btn-blue-outline:hover {
+  color: #fff;
+  background: #149be3;
+}
+

@@ -1,62 +1,79 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "../Styles/Admin.css";
 
 const API = import.meta.env.VITE_API_URL;
-export default function ManageProjects({ goBack }) {
 
+export default function ManageProjects() {
   const [projects, setProjects] = useState([]);
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
   const load = async () => {
-    const res = await fetch(`${API}/project`, {
-      credentials: "include",
-    });
+    const res = await fetch(`${API}/project`, { credentials: "include" });
     const data = await res.json();
     setProjects(data);
   };
 
-  useEffect(() => {
-    load();
-  }, []);
+  useEffect(() => { load(); }, []);
 
   const remove = async (id) => {
     if (!window.confirm("Delete this project?")) return;
-
     const res = await fetch(`${API}/project/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
-
     if (!res.ok) return setMsg("Delete failed.");
-
-    setProjects(projects.filter((p) => p._id !== id));
+    setProjects((prev) => prev.filter((p) => p._id !== id));
   };
 
   return (
-    <div style={{ maxWidth: 700, margin: "120px auto", padding: 16 }}>
-      <h2>Manage Projects</h2>
-
-<button onClick={() => navigate("/admin/panel")}>← Back</button>
-
-
-      {msg && <p>{msg}</p>}
-
-      <ul style={{ marginTop: 20 }}>
-        {projects.map((p) => (
-          <li key={p._id} style={{ marginBottom: 10 }}>
-            <strong>{p.title}</strong>{" "}
-            <Link to={`/project/${p._id}`}>View</Link>
-
+    <div className="admin-page">
+      <div className="admin-container">
+        <div className="admin-header">
+          <h1 className="admin-title">Manage Projects</h1>
+          <div className="d-flex gap-2">
             <button
-              style={{ marginLeft: 10 }}
-              onClick={() => remove(p._id)}
+              className="btn-admin-primary"
+              onClick={() => navigate("/admin/projects/add")}
             >
-              Delete
+              + Add Project
             </button>
-          </li>
-        ))}
-      </ul>
+            <button
+              className="btn-admin-secondary"
+              onClick={() => navigate("/admin/panel")}
+            >
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        {msg && <p className="admin-msg-error">{msg}</p>}
+
+        {projects.length === 0 ? (
+          <div className="admin-card text-center text-muted py-5">
+            No projects yet. Add your first one!
+          </div>
+        ) : (
+          projects.map((p) => (
+            <div className="admin-list-item" key={p._id}>
+              <span className="item-title">{p.title}</span>
+              <div className="d-flex gap-2 flex-shrink-0">
+                <Link
+                  to={`/project/${p._id}`}
+                  className="btn-admin-secondary"
+                  style={{ fontSize: "0.85rem", padding: "0.35rem 0.85rem" }}
+                >
+                  View
+                </Link>
+                <button className="btn-admin-danger" onClick={() => remove(p._id)}>
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 }
