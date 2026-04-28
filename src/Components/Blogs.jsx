@@ -1,186 +1,164 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Bookmark, MoreHorizontal, Star, Twitter } from "lucide-react";
+import { Clock, User, Tag } from "lucide-react";
+import "../Styles/Blog.css";
 
 const API = import.meta.env.VITE_API_URL;
-console.log("API:", API);
+
+const CATEGORY_COLORS = {
+  "Marketing":       { bg: "#eff6ff", text: "#1d4ed8" },
+  "Web Development": { bg: "#f0fdf4", text: "#15803d" },
+  "Design":          { bg: "#fdf4ff", text: "#7e22ce" },
+  "Business":        { bg: "#fff7ed", text: "#c2410c" },
+  "Technology":      { bg: "#f0f9ff", text: "#0369a1" },
+  "Analytics":       { bg: "#fefce8", text: "#a16207" },
+};
+
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short", day: "numeric", year: "numeric",
+  });
+}
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("All");
 
-useEffect(() => {
-  fetch(`${API}/blog`, { credentials: "include" })
-    .then(async (r) => {
-      const data = await r.json().catch(() => null);
-      if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
-      return data;
-    })
-    .then((data) => {
-      console.log("BLOGS:", data);
-      setBlogs(data);
-    })
-    .catch((err) => console.error("BLOG FETCH ERROR:", err));
-}, []);
+  useEffect(() => {
+    fetch(`${API}/blog`, { credentials: "include" })
+      .then(async (r) => {
+        const data = await r.json().catch(() => null);
+        if (!r.ok) throw new Error(data?.message || `HTTP ${r.status}`);
+        return data;
+      })
+      .then(setBlogs)
+      .catch((err) => console.error("BLOG FETCH ERROR:", err));
+  }, []);
 
+  const categories = ["All", ...Array.from(new Set(blogs.map((b) => b.category).filter(Boolean)))];
+
+  const filtered = activeCategory === "All"
+    ? blogs
+    : blogs.filter((b) => b.category === activeCategory);
 
   return (
-    <section className="min-vh-100 bg-light">
-      <div className="container py-5" style={{ marginTop: 120 }}>
-        {/* HEADER */}
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h1 className="fw-bold">Design Collective</h1>
-          <MoreHorizontal />
+    <section className="min-vh-100" style={{ background: "#f8fafc" }}>
+      {/* Hero */}
+      <div className="blog-hero">
+        <div className="container" style={{ maxWidth: 900 }}>
+          <p className="blog-hero-kicker">Insights &amp; Resources</p>
+          <h1 className="blog-hero-title">The Bitiko Blog</h1>
+          <p className="blog-hero-sub">
+            Strategy, design, and digital marketing insights to help your business grow.
+          </p>
+        </div>
+      </div>
+
+      <div className="container py-5" style={{ maxWidth: 1100 }}>
+        {/* Category tabs */}
+        <div className="blog-tabs">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`blog-tab ${activeCategory === cat ? "blog-tab-active" : ""}`}
+              onClick={() => setActiveCategory(cat)}
+            >
+              {cat}
+              <span className="blog-tab-count">
+                {cat === "All" ? blogs.length : blogs.filter((b) => b.category === cat).length}
+              </span>
+            </button>
+          ))}
         </div>
 
-        {/* NAV TABS */}
-        <ul className="nav border-bottom mb-4 flex-nowrap overflow-auto">
-          {[
-            "Home",
-            "About",
-            "Editors' picks",
-            "Newsletter",
-            "Publish",
-          ].map((tab, i) => (
-            <li key={tab} className="nav-item">
-              <span
-                className={`nav-link ${i === 0 ? "fw-semibold text-dark" : "text-muted"}`}
-                style={{ cursor: "pointer" }}
-              >
-                {tab}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="row g-5">
-          {/* MAIN CONTENT */}
+        <div className="row g-4 mt-2">
+          {/* Blog cards */}
           <main className="col-lg-8">
-            {blogs.map((b) => (
-              <article
-                key={b._id}
-                className="border-bottom pb-4 mb-4"
-                style={{ cursor: "pointer" }}
-              >
-                {/* AUTHOR ROW */}
-                <div className="d-flex align-items-center gap-2 mb-2">
-                  <div
-                    className="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
-                    style={{ width: 24, height: 24, fontSize: 12 }}
-                  >
-                    {b.author ? b.author[0] : "A"}
-                  </div>
-                  <span className="small fw-medium">
-                    {b.author || "Admin"}
-                  </span>
+            {filtered.length === 0 && (
+              <p className="text-muted text-center py-5">No posts in this category yet.</p>
+            )}
 
-                  {b.pinned && (
-                    <>
-                      <span className="text-muted">·</span>
-                      <span className="small text-muted">Pinned</span>
-                      <Star size={14} className="text-warning" />
-                    </>
-                  )}
-                </div>
+            {filtered.map((b, i) => {
+              const colors = CATEGORY_COLORS[b.category] || { bg: "#f1f5f9", text: "#475569" };
+              const featured = i === 0 && activeCategory === "All";
 
-                <div className="d-flex gap-4">
-                  {/* TEXT */}
-                  <div className="flex-grow-1">
-                    <h2 className="h5 fw-bold mb-2">{b.title}</h2>
+              return (
+                <Link
+                  key={b._id}
+                  to={`/blog/${b._id}`}
+                  className="blog-card text-decoration-none d-block mb-4"
+                >
+                  <div className={`blog-card-inner ${featured ? "blog-card-featured" : ""}`}>
+                    {b.image && (
+                      <div className={featured ? "blog-card-img-featured" : "blog-card-img"}>
+                        <img src={b.image} alt={b.title} />
+                      </div>
+                    )}
 
-                    <p className="text-muted mb-3" style={{ maxWidth: 520 }}>
-                      {b.excerpt}
-                    </p>
-
-                    <div className="d-flex align-items-center gap-3">
-                      {b.category && (
-                        <span className="badge rounded-pill bg-secondary-subtle text-secondary">
-                          {b.category}
-                        </span>
-                      )}
-
-                      <span className="small text-muted">
-                        {b.readTime || "4 min read"}
+                    <div className="blog-card-body">
+                      <span
+                        className="blog-category-badge"
+                        style={{ background: colors.bg, color: colors.text }}
+                      >
+                        {b.category || "General"}
                       </span>
 
-                      <div className="ms-auto d-flex gap-3">
-                        <Bookmark size={18} className="text-muted" />
-                        <MoreHorizontal size={18} className="text-muted" />
+                      <h2 className={featured ? "blog-card-title-featured" : "blog-card-title"}>
+                        {b.title}
+                      </h2>
+
+                      <p className="blog-card-excerpt">{b.excerpt}</p>
+
+                      <div className="blog-card-meta">
+                        <span><User size={13} /> {b.author || "Bitiko Team"}</span>
+                        <span><Clock size={13} /> {b.readTime || 1} min read</span>
+                        <span>{formatDate(b.createdAt)}</span>
+                        <span className="blog-read-more ms-auto">Read article →</span>
                       </div>
                     </div>
                   </div>
-
-                  {/* IMAGE */}
-                  {b.image && (
-                    <div className="d-none d-sm-block">
-                      <img
-                        src={b.image || "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"}
-                        alt={b.title}
-                        className="rounded"
-                        style={{
-                          width: 120,
-                          height: 120,
-                          objectFit: "cover",
-                        }}
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-3">
-                  <Link
-                    to={`/blog/${b._id}`}
-                    className="text-decoration-none fw-semibold"
-                    style={{ color: "#149be3" }}
-                  >
-                    Read article →
-                  </Link>
-                </div>
-              </article>
-            ))}
-
-            {blogs.length === 0 && (
-              <p className="text-center text-muted mt-5">
-                No blog posts yet.
-              </p>
-            )}
+                </Link>
+              );
+            })}
           </main>
 
-          {/* SIDEBAR */}
+          {/* Sidebar */}
           <aside className="col-lg-4 d-none d-lg-block">
             <div className="position-sticky" style={{ top: 120 }}>
-              {/* ABOUT */}
-              <div className="mb-5">
-                <div
-                  className="rounded-circle bg-primary-subtle d-flex align-items-center justify-content-center mb-3"
-                  style={{ width: 64, height: 64 }}
-                >
-                  🎨
-                </div>
-                <p className="small text-muted">
-                  Curated stories on UX, Visual & Product Design.
-                </p>
-                <button className="btn btn-outline-primary btn-sm rounded-pill">
-                  Following
-                </button>
+              {/* Categories */}
+              <div className="blog-sidebar-card mb-4">
+                <h6 className="blog-sidebar-title"><Tag size={14} /> Categories</h6>
+                <ul className="list-unstyled mb-0">
+                  {categories.filter((c) => c !== "All").map((cat) => {
+                    const count = blogs.filter((b) => b.category === cat).length;
+                    const colors = CATEGORY_COLORS[cat] || { bg: "#f1f5f9", text: "#475569" };
+                    return (
+                      <li key={cat} className="blog-sidebar-category" onClick={() => setActiveCategory(cat)}>
+                        <span
+                          className="blog-category-badge"
+                          style={{ background: colors.bg, color: colors.text, cursor: "pointer" }}
+                        >
+                          {cat}
+                        </span>
+                        <span className="text-muted small ms-auto">{count}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
 
-              {/* SOCIAL */}
-              <div className="mb-5">
-                <p className="small text-muted mb-2">
-                  Connect with us
-                </p>
-                <Twitter />
-              </div>
-
-              {/* NEWSLETTER */}
-              <div className="border rounded p-4">
-                <h6 className="fw-bold mb-1">Newsletter</h6>
+              {/* Newsletter */}
+              <div className="blog-sidebar-card">
+                <h6 className="blog-sidebar-title">Newsletter</h6>
                 <p className="small text-muted mb-3">
-                  Weekly insights, no spam.
+                  Weekly insights on design, marketing, and business growth. No spam.
                 </p>
-                <button className="btn btn-primary w-100 rounded-pill btn-sm">
-                  Subscribe
-                </button>
+                <input
+                  type="email"
+                  className="form-control form-control-sm mb-2"
+                  placeholder="your@email.com"
+                />
+                <button className="btn btn-blue w-100 btn-sm rounded-3">Subscribe</button>
               </div>
             </div>
           </aside>
