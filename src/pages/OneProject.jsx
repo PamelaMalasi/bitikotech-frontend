@@ -41,12 +41,10 @@ export default function OneProject() {
     <div className="one-project-page">
       <div className="container" style={{ maxWidth: 860 }}>
 
-        {/* Back */}
         <Link to="/projects" className="one-project-back">
           <ArrowLeft size={15} /> Back to Projects
         </Link>
 
-        {/* Header */}
         <div className="one-project-header">
           <div>
             <h1 className="one-project-title">{project.title}</h1>
@@ -54,7 +52,6 @@ export default function OneProject() {
               <p className="one-project-desc">{project.description}</p>
             )}
           </div>
-
           {project.link && (
             <a
               href={project.link}
@@ -67,36 +64,20 @@ export default function OneProject() {
           )}
         </div>
 
-        {/* Browser mockup */}
-        {project.screenshot ? (
-          <div className="browser-mockup">
-            {/* Chrome bar */}
-            <div className="browser-bar">
-              <div className="browser-dots">
-                <span className="dot dot-red" />
-                <span className="dot dot-yellow" />
-                <span className="dot dot-green" />
-              </div>
-              <div className="browser-url">
-                {project.link
-                  ? project.link.replace(/^https?:\/\//, "")
-                  : project.title.toLowerCase().replace(/\s+/g, "") + ".com"}
-              </div>
+        {/* Screenshot — vertical rectangle, centred */}
+        <div className="one-project-screenshot-wrap">
+          {project.screenshot ? (
+            <img
+              src={project.screenshot}
+              alt={project.title}
+              className="one-project-screenshot"
+            />
+          ) : (
+            <div className="one-project-empty">
+              No screenshot uploaded yet.
             </div>
-
-            {/* Screenshot */}
-            <div className="browser-screen">
-              <img
-                src={project.screenshot}
-                alt={`${project.title} screenshot`}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="one-project-empty">
-            No screenshot uploaded for this project yet.
-          </div>
-        )}
+          )}
+        </div>
 
       </div>
     </div>
