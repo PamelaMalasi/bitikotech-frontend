@@ -7,8 +7,7 @@ import Masonry from "react-masonry-css";
 const API = import.meta.env.VITE_API_URL;
 
 const breakpoints = {
-  default: 3,
-  992: 2,
+  default: 2,
   576: 1,
 };
 
