@@ -9,6 +9,7 @@ export default function AddProject() {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
+  const [pdf, setPdf] = useState(null);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ export default function AddProject() {
     setMsg("");
 
     if (!title || !description || !image) {
-      setMsg("Please fill all required fields and choose an image.");
+      setMsg("Please fill all required fields and choose a cover image.");
       return;
     }
 
@@ -28,14 +29,20 @@ export default function AddProject() {
     fd.append("description", description);
     fd.append("link", link);
     fd.append("image", image);
+    if (pdf) fd.append("pdf", pdf);
 
-    const res = await fetch(`${API}/project`, { method: "POST", credentials: "include", body: fd });
+    const res = await fetch(`${API}/project`, {
+      method: "POST",
+      credentials: "include",
+      body: fd,
+    });
     setLoading(false);
 
     if (!res.ok) return setMsg("Failed to create project.");
 
     setMsg("success");
-    setTitle(""); setDescription(""); setLink(""); setImage(null);
+    setTitle(""); setDescription(""); setLink("");
+    setImage(null); setPdf(null);
   };
 
   return (
@@ -49,12 +56,8 @@ export default function AddProject() {
         </div>
 
         <div className="admin-card">
-          {msg === "success" && (
-            <p className="admin-msg-success">Project created successfully.</p>
-          )}
-          {msg && msg !== "success" && (
-            <p className="admin-msg-error">{msg}</p>
-          )}
+          {msg === "success" && <p className="admin-msg-success">Project created successfully.</p>}
+          {msg && msg !== "success" && <p className="admin-msg-error">{msg}</p>}
 
           <form onSubmit={submit} className="admin-form">
             <div className="mb-3">
@@ -90,13 +93,25 @@ export default function AddProject() {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-3">
               <label className="form-label fw-semibold small">Cover Image</label>
               <input
                 className="form-control"
                 type="file"
                 accept="image/*"
                 onChange={(e) => setImage(e.target.files?.[0] || null)}
+              />
+            </div>
+
+            <div className="mb-4">
+              <label className="form-label fw-semibold small">
+                Project PDF <span className="text-muted fw-normal">(optional — shown on the project page)</span>
+              </label>
+              <input
+                className="form-control"
+                type="file"
+                accept="application/pdf"
+                onChange={(e) => setPdf(e.target.files?.[0] || null)}
               />
             </div>
 
