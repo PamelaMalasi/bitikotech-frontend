@@ -22,7 +22,7 @@ export default function OneProject() {
 
   if (error) {
     return (
-      <div className="container text-center py-5" style={{ marginTop: 100 }}>
+      <div className="container text-center py-5" style={{ marginTop: 140 }}>
         <p className="text-muted">{error}</p>
         <Link to="/projects" className="btn btn-blue rounded-4 mt-3">← Back to Projects</Link>
       </div>
@@ -31,7 +31,7 @@ export default function OneProject() {
 
   if (!project) {
     return (
-      <div className="container text-center py-5" style={{ marginTop: 100 }}>
+      <div className="container text-center py-5" style={{ marginTop: 140 }}>
         <div className="spinner-border text-primary" role="status" />
       </div>
     );
@@ -39,7 +39,7 @@ export default function OneProject() {
 
   return (
     <div className="one-project-page">
-      <div className="container" style={{ maxWidth: 860 }}>
+      <div className="container" style={{ maxWidth: 1000 }}>
 
         <Link to="/projects" className="one-project-back">
           <ArrowLeft size={15} /> Back to Projects
@@ -64,20 +64,30 @@ export default function OneProject() {
           )}
         </div>
 
-        {/* Screenshot — vertical rectangle, centred */}
-        <div className="one-project-screenshot-wrap">
-          {project.screenshot ? (
-            <img
-              src={project.screenshot}
-              alt={project.title}
-              className="one-project-screenshot"
-            />
-          ) : (
-            <div className="one-project-empty">
-              No screenshot uploaded yet.
+        {/* Browser mockup */}
+        {project.screenshot ? (
+          <div className="browser-mockup">
+            <div className="browser-bar">
+              <div className="browser-dots">
+                <span className="dot dot-red" />
+                <span className="dot dot-yellow" />
+                <span className="dot dot-green" />
+              </div>
+              <div className="browser-url">
+                {project.link
+                  ? project.link.replace(/^https?:\/\//, "")
+                  : project.title.toLowerCase().replace(/\s+/g, "") + ".com"}
+              </div>
             </div>
-          )}
-        </div>
+            <div className="browser-screen">
+              <img src={project.screenshot} alt={`${project.title} screenshot`} />
+            </div>
+          </div>
+        ) : (
+          <div className="one-project-empty">
+            No screenshot uploaded yet.
+          </div>
+        )}
 
       </div>
     </div>
