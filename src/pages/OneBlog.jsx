@@ -54,14 +54,14 @@ export default function OneBlog() {
   const colors = CATEGORY_COLORS[blog.category] || { bg: "#f1f5f9", text: "#475569" };
 
   return (
-    <div style={{ background: "#f8fafc", minHeight: "100vh", paddingTop: 140 }}>
-      {/* Hero image */}
+    <div style={{ background: "#f8fafc", minHeight: "100vh" }}>
+      {/* Hero image — flush against navbar */}
       {blog.image && (
-        <div style={{ width: "100%", maxHeight: 480, overflow: "hidden" }}>
+        <div style={{ width: "100%", marginTop: 96, overflow: "hidden" }}>
           <img
             src={blog.image}
             alt={blog.title}
-            style={{ width: "100%", height: 480, objectFit: "cover" }}
+            style={{ width: "100%", height: 300, objectFit: "cover", display: "block" }}
           />
         </div>
       )}
