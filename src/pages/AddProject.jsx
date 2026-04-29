@@ -9,7 +9,7 @@ export default function AddProject() {
   const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
   const [image, setImage] = useState(null);
-  const [pdf, setPdf] = useState(null);
+  const [screenshot, setScreenshot] = useState(null);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function AddProject() {
     fd.append("description", description);
     fd.append("link", link);
     fd.append("image", image);
-    if (pdf) fd.append("pdf", pdf);
+    if (screenshot) fd.append("screenshot", screenshot);
 
     const res = await fetch(`${API}/project`, {
       method: "POST",
@@ -42,7 +42,7 @@ export default function AddProject() {
 
     setMsg("success");
     setTitle(""); setDescription(""); setLink("");
-    setImage(null); setPdf(null);
+    setImage(null); setScreenshot(null);
   };
 
   return (
@@ -95,6 +95,7 @@ export default function AddProject() {
 
             <div className="mb-3">
               <label className="form-label fw-semibold small">Cover Image</label>
+              <p className="text-muted small mb-1">Shown on the projects grid.</p>
               <input
                 className="form-control"
                 type="file"
@@ -105,13 +106,14 @@ export default function AddProject() {
 
             <div className="mb-4">
               <label className="form-label fw-semibold small">
-                Project PDF <span className="text-muted fw-normal">(optional — shown on the project page)</span>
+                Website Screenshot <span className="text-muted fw-normal">(optional)</span>
               </label>
+              <p className="text-muted small mb-1">Shown inside the project page as a mockup.</p>
               <input
                 className="form-control"
                 type="file"
-                accept="application/pdf"
-                onChange={(e) => setPdf(e.target.files?.[0] || null)}
+                accept="image/*"
+                onChange={(e) => setScreenshot(e.target.files?.[0] || null)}
               />
             </div>
 
