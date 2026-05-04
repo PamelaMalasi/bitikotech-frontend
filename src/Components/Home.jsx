@@ -1,21 +1,16 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { TrendingUp, Globe } from "lucide-react";
 
 import '../Styles/Home.css';
 import '../Styles/Floating.css';
 import '../Styles/GrowthSection.css';
 
-import Hservices from "./Hservices";
 import Hcarousel from "./Hcarousel";
 import Hcta from "./Hcta";
 import GrowthSection from './GrowthSection';
 import BackgroundVideo from './BackgroundVideo';
 
-import mp5 from "../images/somecanva7.mp4";  // used in the two ratio boxes
-// import mp6 from "../images/somecanva8.mp4";
 import mp7 from "../images/somecanva11.mp4";
 import mp6 from "../images/somecanva18.mp4";
 
@@ -40,20 +35,9 @@ const Home = () => {
                 />
 
                 <div className="home-text position-relative text-center" style={{ zIndex: 3 }}>
-                    <p className="hero-label">The Digital Growth Agency</p>
-                    <h2 className="hero-headline text-glow">
-                        MORE CLIENTS.<br />
-                        MORE VISIBILITY.<br />
-                        MORE GROWTH.
+                    <h2 className="fw-bold text-glow" style={{ color: "#fff" }}>
+                        Ready to scale up?
                     </h2>
-                    <p className="hero-sub">
-                        Full-service agency covering marketing, social media, websites,
-                        brand strategy, UI/UX, and SEO — everything your business needs
-                        to attract more clients and grow faster.
-                    </p>
-                    <Link to="/contact" className="btn btn-blue rounded-4 hero-cta">
-                        Get Free Consultation →
-                    </Link>
                 </div>
 
                 {/* hero cards */}
@@ -203,8 +187,7 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Services + Carousel (inside the same white band) */}
-                    <Hservices />
+                    {/* Carousel */}
                     <Hcarousel />
                 </div>
             </section>
