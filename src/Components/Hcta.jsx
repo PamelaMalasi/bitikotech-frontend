@@ -1,35 +1,35 @@
-// src/Components/Hcta.jsx
-import React from "react";
+import { Link } from "react-router-dom";
 
-export default function Hcta({ onConsult, onViewWork }) {
+export default function Hcta() {
   return (
-    <section className="py-5" style={{backgroundColor : "white"}}>
+    <section className="py-5" style={{ background: "var(--light)" }}>
       <div className="container px-4">
-        <div className="card text-center text-white border-0 shadow-lg rounded-4" style={{
-  background: 'linear-gradient(90deg, var(--bs-primary), var(--bs-info))'
-}}>
-          <div className="card-body p-5">
-            <h2 className="display-4 fw-bold mb-4">
-              Ready to Scale Your Business?
-            </h2>
-
-            {/* style must be an object */}
-            <p className="lead mb-5 mx-auto" style={{ maxWidth: 700 }}>
-              Join hundreds of successful businesses who have transformed their
-              growth with our proven strategies.
-            </p>
-
-            <div className="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-              {/* Use buttons if there’s no real link */}
-              <button
-                type="button"
-                className="btn btn-light btn-lg text-primary rounded-4"
-                onClick={onConsult}
-              >
-                Get Free Consultation
-              </button>
-            </div>
-          </div>
+        <div
+          className="rounded-4 text-center text-white p-5"
+          style={{
+            background: "linear-gradient(135deg, var(--dark) 0%, var(--dark-mid) 100%)",
+            boxShadow: "0 24px 60px rgba(15,23,42,0.18)",
+          }}
+        >
+          <p style={{
+            fontSize: "0.72rem", letterSpacing: "0.22em", textTransform: "uppercase",
+            color: "var(--brand)", fontWeight: 700, marginBottom: 14,
+          }}>
+            Let's Work Together
+          </p>
+          <h2 className="fw-bold mb-3" style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}>
+            Ready to Grow Your Business?
+          </h2>
+          <p className="mb-4 mx-auto" style={{
+            maxWidth: 560, color: "rgba(255,255,255,0.65)",
+            fontSize: "1rem", lineHeight: 1.75,
+          }}>
+            Bitiko handles everything — marketing, social media, web development, SEO —
+            so you can focus on running your business while we grow it.
+          </p>
+          <Link to="/contact" className="btn btn-blue btn-lg rounded-4 px-5">
+            Book Free Consultation →
+          </Link>
         </div>
       </div>
     </section>

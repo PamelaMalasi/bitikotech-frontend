@@ -13,17 +13,14 @@
 } */
 
 .card-services {
-    background-color: white;
-     box-shadow: 0 14px 28px rgba(69, 166, 226, 0.289); 
-    /* opacity: 0.8; */
+  background-color: #fff;
+  border: 1px solid var(--border, #e2e8f0);
+  box-shadow: none;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
 }
 
-.services-button{
-    border: 1px solid #e1d5fa; 
-    background-color: white;
-}
-
-.services-button:hover{
-    background-color: #e8ddfd;
+.card-services:hover {
+  box-shadow: 0 8px 28px rgba(20, 155, 227, 0.12);
+  transform: translateY(-2px);
 }
 

@@ -1,16 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { TrendingUp, Users, Target, Zap } from "lucide-react";
+import { TrendingUp, Users, Layers, Zap } from "lucide-react";
 import '../Styles/GrowthSection.css';
 
 
 
 export default function GrowthSection() {
   const stats = [
-    { icon: Users, value: "500+", label: "Happy Clients" },
-    { icon: TrendingUp, value: "2M+", label: "Leads Generated" },
-    { icon: Target, value: "150%", label: "Average ROI" },
-    { icon: Zap, value: "24/7", label: "Support" },
+    { icon: Users,      value: "50+",  label: "Brands Grown" },
+    { icon: TrendingUp, value: "3×",   label: "Avg. Visibility" },
+    { icon: Layers,     value: "6",    label: "Core Services" },
+    { icon: Zap,        value: "24/7", label: "Dedicated Support" },
   ];
 
   return (

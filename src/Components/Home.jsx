@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { TrendingUp, Globe } from "lucide-react";
 
 import '../Styles/Home.css';
@@ -39,9 +40,20 @@ const Home = () => {
                 />
 
                 <div className="home-text position-relative text-center" style={{ zIndex: 3 }}>
-                    <h2 className="fw-bold text-glow" style={{ color: "#fff" }}>
-                        Ready to scale up?
+                    <p className="hero-label">The Digital Growth Agency</p>
+                    <h2 className="hero-headline text-glow">
+                        MORE CLIENTS.<br />
+                        MORE VISIBILITY.<br />
+                        MORE GROWTH.
                     </h2>
+                    <p className="hero-sub">
+                        Full-service agency covering marketing, social media, websites,
+                        brand strategy, UI/UX, and SEO — everything your business needs
+                        to attract more clients and grow faster.
+                    </p>
+                    <Link to="/contact" className="btn btn-blue rounded-4 hero-cta">
+                        Get Free Consultation →
+                    </Link>
                 </div>
 
                 {/* hero cards */}
@@ -139,8 +151,9 @@ const Home = () => {
                                         </div>
 
                                         <p className="lead" style={{ fontSize: "1rem", lineHeight: 1.7 }}>
-                                            Bitiko transforms digital complexity into business momentum. We combine strategic design,
-                                            technical excellence, and performance marketing to help brands achieve measurable growth.
+                                            Bitiko is your all-in-one growth partner. We handle everything — from brand identity
+                                            and social media to website development and SEO — so you can focus on running your
+                                            business while we focus on growing it.
                                         </p>
                                     </div>
 
@@ -185,7 +198,7 @@ const Home = () => {
                                     color: '#606774', textWrap: 'pretty', hyphens: 'auto'
                                 }}
                             >
-                                Bitiko turns complexity into momentum. We design with taste, engineer with rigor, and scale with performance marketing so your brand wins where it matters—awareness, conversion, retention. One agile team, zero fluff, results you can feel.
+                                More clients. More visibility. More growth. Bitiko is the catalyst behind brands that stand out — combining strategy, creativity, and execution into one seamless service. One team. Total focus. Zero fluff.
                             </p>
                         </div>
                     </div>

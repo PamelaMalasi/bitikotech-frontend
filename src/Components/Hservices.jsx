@@ -1,156 +1,84 @@
-import React from "react";
+import { TrendingUp, Share2, Search, Globe, Palette, Target } from "lucide-react";
+import { Link } from "react-router-dom";
 import '../Styles/Hservices.css';
 
-export default function Services() {
-  const services = [
-    {
-      icon: (
-        <svg
-          className="bi"
-          width="32"
-          height="32"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            stroke="currentColor"
-            fill="none"
-            d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
-          />
-        </svg>
-      ),
-      title: "Digital Marketing",
-      description:
-        "Comprehensive digital marketing strategies to boost your online presence and drive qualified leads.",
-      features: [
-        "SEO Optimization",
-        "Social Media Marketing",
-        "PPC Campaigns",
-        "Content Strategy",
-      ],
-    },
-    {
-      icon: (
-        <svg
-          className="bi"
-          width="32"
-          height="32"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            stroke="currentColor"
-            fill="none"
-            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"
-          />
-        </svg>
-      ),
-      title: "Web Development",
-      description:
-        "Custom websites and web applications built to convert visitors into customers and scale your.",
-      features: [
-        "Responsive Design",
-        "E-commerce Solutions",
-        "CMS Integration",
-        "Performance Optimization",
-      ],
-    },
-    {
-      icon: (
-        <svg
-          className="bi"
-          width="32"
-          height="32"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            stroke="currentColor"
-            fill="none"
-            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 00-2-2z"
-          />
-        </svg>
-      ),
-      title: "Analytics & Insights",
-      description:
-        "Data-driven insights to optimize your marketing performance and make informed business decisions.",
-      features: [
-        "Performance Tracking",
-        "ROI Analysis",
-        "Customer Insights",
-        "Conversion Optimization",
-      ],
-    },
-  ];
+const SERVICES = [
+  {
+    icon: TrendingUp,
+    title: "Digital Marketing",
+    description: "Data-driven campaigns that put your brand in front of the right people at the right time.",
+  },
+  {
+    icon: Share2,
+    title: "Social Media Management",
+    description: "Consistent, engaging content that builds your audience and keeps your brand top of mind.",
+  },
+  {
+    icon: Search,
+    title: "SEO",
+    description: "Get found before your competitors. We optimize your presence for the searches that matter.",
+  },
+  {
+    icon: Globe,
+    title: "Website Development",
+    description: "Fast, clean, conversion-focused websites built to turn visitors into clients.",
+  },
+  {
+    icon: Palette,
+    title: "UI/UX Design",
+    description: "Interfaces that make people stop, click, and stay — design that genuinely converts.",
+  },
+  {
+    icon: Target,
+    title: "Brand Strategy",
+    description: "A brand people recognize, remember, and trust — built with purpose from the ground up.",
+  },
+];
 
+export default function Hservices() {
   return (
-    <section id="services" className="services py-5">
+    <section className="py-5">
       <div className="container">
-        {/* Section header */}
         <div className="text-center mb-5">
-          <h2 className="display-5 fw-bold mb-3">Our Services</h2>
-          {/* <p className="lead text-muted mx-auto" style={{ maxWidth: "700px" }}>
-            We provide comprehensive solutions to help your business grow and
-            succeed in the digital landscape.
-          </p> */}
+          <p style={{
+            fontSize: "0.72rem", letterSpacing: "0.2em", textTransform: "uppercase",
+            color: "var(--brand)", fontWeight: 700, marginBottom: 10,
+          }}>
+            What We Do
+          </p>
+          <h2 className="fw-bold" style={{ color: "var(--dark)", fontSize: "clamp(1.6rem, 3vw, 2.2rem)" }}>
+            Six Services. One Goal: Your Growth.
+          </h2>
         </div>
 
-        {/* Services grid */}
-       <div className="row g-4">
-  {services.map((service, index) => (
-    <div key={index} className="col-md-4">
-      {/* ⬇️ put rounded + shadow here */}
-      <div
-        className="card-services card h-100 border-0 bg-white rounded-4"
-        style={{ boxShadow: '0 14px 28px rgba(69, 166, 226, 0.17)', overflow: 'hidden' }}
-      >
-        {/* ⬇️ no rounded, no box-shadow here */}
-        <div className="card-body text-center p-4">
-          <div
-            className="d-flex justify-content-center align-items-center text-white rounded-circle mb-4 mx-auto"
-            style={{ backgroundColor: '#149be3fc', width: "64px", height: "64px" }}
-          >
-            {service.icon}
-          </div>
-
-          <h3 className="h5 fw-semibold mb-3">{service.title}</h3>
-          <p className="text-muted mb-4">{service.description}</p>
-
-          <ul className="list-unstyled text-start mb-4">
-            {service.features.map((feature, featureIndex) => (
-              <li key={featureIndex} className="mb-2 d-flex align-items-center">
-                <span
-                  className="rounded-circle me-2"
-                  style={{
-                    backgroundColor: '#9569ebff',
-                    width: "8px",
-                    height: "8px",
-                    display: "inline-block"
-                  }}
-                ></span>
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-
-          <button className="rounded-4 services-button btn w-100">
-            Learn More
-          </button>
+        <div className="row g-4">
+          {SERVICES.map(({ icon: Icon, title, description }, i) => (
+            <div className="col-md-6 col-lg-4" key={i}>
+              <div className="card-services h-100 rounded-4 p-4" style={{ background: "#fff" }}>
+                <div style={{
+                  width: 46, height: 46, borderRadius: 10,
+                  background: "#eff6ff",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: 16,
+                }}>
+                  <Icon size={20} color="#149be3" />
+                </div>
+                <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--dark)", marginBottom: 8 }}>
+                  {title}
+                </h3>
+                <p style={{ fontSize: "0.88rem", color: "var(--muted)", lineHeight: 1.65, margin: 0 }}>
+                  {description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-    </div>
-  ))}
-</div>
 
+        <div className="text-center mt-5">
+          <Link to="/services" className="btn btn-blue rounded-4 px-4 py-2" style={{ fontSize: "0.9rem" }}>
+            See All Services →
+          </Link>
+        </div>
       </div>
     </section>
   );

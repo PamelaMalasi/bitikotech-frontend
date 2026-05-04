@@ -17,9 +17,19 @@ body {
 :root{
   --nav-h: 96px;
   --hero-h: calc(100vh + var(--nav-h));
+
+  /* ── Brand design tokens ── */
+  --brand:      #149be3;
+  --brand-dark: #0e82c5;
+  --dark:       #0f172a;
+  --dark-mid:   #1e293b;
+  --body:       #334155;
+  --muted:      #64748b;
+  --light:      #f8fafc;
+  --border:     #e2e8f0;
 }
 .bg-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
-.bg-video-dim{ position:absolute; inset:0; background:rgba(0,0,0,.35); z-index:1; pointer-events:none; }
+.bg-video-dim{ position:absolute; inset:0; background:rgba(194, 191, 191, 0.352); z-index:1; pointer-events:none; }
 
 
 
