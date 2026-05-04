@@ -17,7 +17,7 @@ export default function BackgroundVideo() {
       >
         <source src={mp6} type="video/mp4" />
       </video>
-      <div className="bg-video-overlay" />
+      <div className="bg-video-dim" />
     </>
   );
 }

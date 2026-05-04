@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 
@@ -10,8 +10,6 @@ import Contact from "./Components/Contact";
 import Footer from "./Components/Footer";
 import Blogs from "./Components/Blogs";
 import Projects from "./Components/Projects";
-import BackgroundVideo from "./Components/BackgroundVideo";
-
 import AdminLogin from "./pages/AdminLogin";
 import AdminPanel from "./pages/AdminPanel";
 import ManageBlogs from "./pages/ManageBlogs";
@@ -24,12 +22,8 @@ import OneProject from "./pages/OneProject";
 import RequireAdmin from "./pages/RequireAdmin";
 
 function AppRoutes({ loggedIn, setLoggedIn }) {
-  const location = useLocation();
-  const showBackgroundVideo = location.pathname === "/";
-
   return (
     <div className="hero-section">
-      {showBackgroundVideo && <BackgroundVideo />}
       <Navigation />
 
       <Routes>

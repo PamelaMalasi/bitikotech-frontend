@@ -18,9 +18,8 @@ body {
   --nav-h: 96px;
   --hero-h: calc(100vh + var(--nav-h));
 }
-.bg-video{ position:fixed; inset:0; width:100%; height:100vh; object-fit:cover; z-index:-2; }
-.bg-video-dim{ position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:-1; pointer-events:none; }
-.bg-video-cover{ position:fixed; top:var(--hero-h); left:0; right:0; bottom:0; background:#fff; z-index:-1; pointer-events:none; }
+.bg-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+.bg-video-dim{ position:absolute; inset:0; background:rgba(0,0,0,.35); z-index:1; pointer-events:none; }
 
 
 

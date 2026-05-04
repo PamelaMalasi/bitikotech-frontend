@@ -11,6 +11,7 @@ import Hservices from "./Hservices";
 import Hcarousel from "./Hcarousel";
 import Hcta from "./Hcta";
 import GrowthSection from './GrowthSection';
+import BackgroundVideo from './BackgroundVideo';
 
 import mp5 from "../images/somecanva7.mp4";  // used in the two ratio boxes
 // import mp6 from "../images/somecanva8.mp4";
@@ -24,27 +25,27 @@ const Home = () => {
 
             {/* HERO */}
             <div className="home-section position-relative overflow-hidden" style={{ paddingTop: '140px' }}>
-                {/* gradient overlay behind hero */}
+                {/* background video — scoped to this section only */}
+                <BackgroundVideo />
+
+                {/* colour tint over the video */}
                 <div
                     className="position-absolute top-0 start-0 w-100 h-100"
                     style={{
                         background: 'linear-gradient(90deg, rgba(107,70,193,0.20), rgba(49,130,206,0.20))',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        zIndex: 0,
+                        zIndex: 2,
                         pointerEvents: 'none',
                     }}
                 />
 
-                <div className="home-text position-relative text-center" style={{ zIndex: 1 }}>
+                <div className="home-text position-relative text-center" style={{ zIndex: 3 }}>
                     <h2 className="fw-bold text-glow" style={{ color: "#fff" }}>
                         Ready to scale up?
                     </h2>
                 </div>
 
                 {/* hero cards */}
-                <div className="cards d-flex justify-content-center flex-wrap" style={{ gap: '56px' }}>
+                <div className="cards d-flex justify-content-center flex-wrap" style={{ gap: '56px', position: 'relative', zIndex: 3 }}>
                     {/* Card 1 */}
                     <div className="position-relative rounded-4">
                         <div className='my-card'></div>
